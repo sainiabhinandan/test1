@@ -282,23 +282,40 @@ After this correction:
 
 This action was taken solely for security reasons to prevent exposing credentials.
 
-## Small code snippets
+## Quick Validation Checklist
 
-### Backend strategy selection
+Use this checklist to verify the project quickly after setup:
 
-```python
-from documents.llm.factory import get_llm_backend
+1. Start local server
 
-llm = get_llm_backend()  # returns RemoteLLM or LocalLLM based on LLM_BACKEND
-result = llm.classify(raw_text)
+```bash
+python manage.py runserver
 ```
 
-### Confidence scoring
+2. Run automated tests
 
-```python
-from documents.confidence import compute_confidence
+```bash
+python manage.py test
+```
 
-confidence = compute_confidence(category, extracted_fields, raw_text)
+3. Test classify endpoint (multipart upload)
+
+```bash
+curl -X POST http://127.0.0.1:8000/api/documents/classify/ \
+  -F "files=@sample/payslip.png" \
+  -F "files=@sample/invoice.pdf"
+```
+
+4. Test list endpoint with filters
+
+```bash
+curl "http://127.0.0.1:8000/api/documents/?category=payslip&confidence=high"
+```
+
+5. Test detail endpoint for one result
+
+```bash
+curl http://127.0.0.1:8000/api/documents/1/
 ```
 
 ## Use of AI
