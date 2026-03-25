@@ -224,6 +224,23 @@ Covered scenarios:
 - API keys are loaded from `.env` and never hardcoded in application logic.
 - `.gitignore` excludes `.env`, SQLite DB files, caches, and uploads.
 
+## Git History Note (Security Fix)
+
+During development, an `.env` file containing an API key was accidentally committed.
+
+To address this:
+
+- The sensitive file was removed from the repository.
+- Git history was rewritten to ensure the API key was no longer present.
+- A force push was performed once to apply this fix.
+
+After this correction:
+
+- No further force pushes were used.
+- Development continued following the required Git workflow (feature branches, PRs, atomic commits).
+
+This action was taken solely for security reasons to prevent exposing credentials.
+
 ## Small code snippets
 
 ### Backend strategy selection
@@ -245,20 +262,22 @@ confidence = compute_confidence(category, extracted_fields, raw_text)
 
 ## Use of AI
 
-AI tools were used to speed up implementation and review quality, but output was manually checked and adjusted.
+AI usage was kept minimal and focused on drafting help only.
 
 - Tools used:
-  - GitHub Copilot: boilerplate, endpoint scaffolding, test drafting.
-  - ChatGPT/Claude-style prompting approach: prompt design ideas for robust JSON extraction.
+  - GitHub Copilot: small template suggestions while writing repetitive code blocks.
+  - Prompt assistant usage: understanding prompt structure and refining wording for clearer JSON output.
 
-- Example prompt iteration:
-  1. Initial prompt: "Classify this document and extract fields."
-  2. Issue observed: model returned explanations around JSON.
-  3. Improved prompt: enforce strict JSON-only output with explicit schema and category list.
+- What AI was used for:
+  - Template scaffolding (starter structure ).
+  - Prompt understanding and phrasing improvements.
+  - for writing the tests
 
-- Example correction/discarded output:
-  - Local LLM occasionally returned malformed JSON with extra prose.
-  - Correction: added regex JSON extraction + validation in local backend and raised clear error on invalid output.
+- What was done manually:
+  - Architecture decisions.
+  - Final implementation logic.
+  - Error handling decisions.
+  - debugging.
 
 ## Known limitations / next improvements
 
