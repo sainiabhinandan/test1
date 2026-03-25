@@ -1,4 +1,5 @@
 import requests, os, json
+from .base import LLMBackend
 
 class LocalLLM(LLMBackend):
     def classify(self, text: str) -> dict:

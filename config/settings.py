@@ -117,9 +117,15 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 
+
+
+
+
+#added settings
+
 from dotenv import load_dotenv
 import os
 load_dotenv()
 
-INSTALLED_APPS += ['rest_framework', 'documents']
+INSTALLED_APPS += ['rest_framework','django_filters',  'documents']
 LLM_BACKEND = os.getenv('LLM_BACKEND', 'remote')

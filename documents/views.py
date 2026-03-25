@@ -70,6 +70,21 @@ class DocumentDetailView(generics.RetrieveAPIView):
     serializer_class = DocumentResultSerializer
 
 
+# class DocumentListView(generics.ListAPIView):
+#     serializer_class = DocumentResultSerializer
+
+#     def get_queryset(self):
+#         qs = ClassifiedDocument.objects.all()
+#         cat = self.request.query_params.get("category")
+#         conf = self.request.query_params.get("confidence")
+#         if cat:
+#             qs = qs.filter(category=cat)
+#         if conf:
+#             qs = qs.filter(confidence=conf)
+#         return qs
+
+# chage it to return count and results in the same format as detail view, but with pagination support
+
 class DocumentListView(generics.ListAPIView):
     serializer_class = DocumentResultSerializer
 
@@ -82,3 +97,11 @@ class DocumentListView(generics.ListAPIView):
         if conf:
             qs = qs.filter(confidence=conf)
         return qs
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        return Response({
+            "count": queryset.count(),
+            "results": serializer.data
+        })

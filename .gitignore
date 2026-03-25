@@ -1,6 +1,8 @@
 .env
 *.sqlite3
 __pycache__/
+uploads/
+"*.pyc"
 *.pyc
 *.pyo
 .venv/

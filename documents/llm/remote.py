@@ -1,4 +1,5 @@
 import anthropic, os, json
+from .base import LLMBackend
 
 PROMPT_TEMPLATE = """You are a document classifier for an EU worker posting company.
 Classify the document text below into exactly one category:
