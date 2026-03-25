@@ -50,12 +50,12 @@ def extract_text(file_path: str) -> str:
     Hybrid extraction pipeline:
     - Extract text using pdfplumber
     - Always run OCR using EasyOCR (via PyMuPDF)
-    - Merge results intelligently
+    
     """
 
     suffix = Path(file_path).suffix.lower()
 
-    # 📄 PDF handling
+    # PDF handling
     if suffix == ".pdf":
         pdf_text = extract_text_from_pdf(file_path)
 
@@ -72,11 +72,10 @@ def extract_text(file_path: str) -> str:
         # If weak/empty PDF text → rely on OCR
         return ocr_text
 
-    # 🖼️ Image handling
+    # Image handling
     elif suffix in (".jpg", ".jpeg", ".png"):
         import cv2
         img = cv2.imread(file_path)
         return extract_text_from_image_array(img)
 
-    # ❌ Unsupported
     raise ValueError(f"Unsupported format: {suffix}")
