@@ -71,8 +71,49 @@ SECRET_KEY=django-insecure-your-secret-key-here
 LLM_BACKEND=local
 OLLAMA_BASE_URL=http://localhost:11434
 OLLAMA_MODEL=llama3.2
-EOF
 ```
+
+## Install Ollama (Local LLM)
+
+Use these steps so the project works in local mode without remote API keys.
+
+1. Download and install Ollama
+  - Windows: https://ollama.com/download/windows
+  - macOS/Linux: https://ollama.com/download
+
+2. Verify installation
+
+```bash
+ollama --version
+```
+
+3. Pull the model used by this project
+
+```bash
+ollama pull llama3.2
+```
+
+4. Start Ollama service (if not already running)
+
+```bash
+ollama serve
+```
+
+5. Confirm local generation works
+
+```bash
+ollama run llama3.2 "Say hello"
+```
+
+6. Keep `.env` configured for local mode
+
+```env
+LLM_BACKEND=local
+OLLAMA_BASE_URL=http://localhost:11434
+OLLAMA_MODEL=llama3.2
+```
+
+If `ollama` command is not recognized on Windows, restart the terminal after installation.
 
 ## Supported Categories
 
