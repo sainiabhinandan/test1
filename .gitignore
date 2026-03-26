@@ -5,6 +5,4 @@ __pycache__/
 *.pyc
 venv/
 media/
-*.png
-*.pdf
 EOF
